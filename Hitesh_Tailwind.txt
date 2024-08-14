@@ -1,0 +1,146 @@
+you can refer tailwindcss.com
+add extension tailwindcss for suggetions
+
+1. command in terminal
+npx tailwindcss init
+(it wil create tailwind.config.js)
+
+2.create file input.css
+and add this
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+3.in tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./dist/*.html"],                   //write this so whenever in dist folder any html file you use tailwind it will automatically create basic css for every html file
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+4. you have to create one file for tailwind css means whenever you use any tailwind css in html all should be create internal 
+code for any css file
+
+command- npx tailwindcss -i ./src/input.css -o ./dist/style.css --watch
+
+here all will update in style.css
+
+## p-6 - padding
+max-w-sm- it gives width to the element above that sm pixel content will not goes out it fit into that
+rounded-xl- give radius
+space-x-4- provide margin horizontally between childs of parent
+shadow-lg- provide shadow
+
+imp-
+f we have big image and we use max-w-sm that big image shrink and fit into that div. but if we have large text of lorm100 that does not shrink when i use max-w-sm
+ChatGPT
+You're correct in noticing that while the max-w-sm class will shrink a large image to fit within the specified width, it does not automatically shrink or wrap large amounts of text to fit within that same width. Here's why:
+
+How max-w-sm Affects Images vs. Text:
+Images:
+
+Shrink to Fit: When you apply max-w-sm to a container with an image, the image's width will be constrained to the maximum width of 384px (24rem). If the image is larger than this width, it will shrink to fit within the container, maintaining its aspect ratio.
+Responsive Behavior: Images are naturally responsive in this way, as they adjust their dimensions based on the container's size.
+Text:
+
+Wraps but Doesn't Shrink: Text behaves differently. When you have a large amount of text inside a container with max-w-sm, the text will not "shrink" in the same way an image does. Instead, the text will wrap to fit within the container's width.
+Overflow Handling: If the text is very long and continuous (like a long word or string without spaces), it may overflow the container or cause the container to expand horizontally beyond max-w-sm unless you explicitly handle overflow.
+
+###
+<div class='parent'>
+   <div class='a>
+       <p></p>
+       <p></p>
+   </div>
+</div>
+mx-auto - set entire div 'a' horizontally center to its 'parent' div
+justify-center- set child of div'a'horizontally center p,p not div 'a' only child set to center
+
+
+##font size-
+text-base, text-xl
+
+##in tailwind whatever we apply that first apply like mobile responsive
+default mobile responsive
+
+##sm- mhanje jevdhe small aahet aani tyachya varche saglyanvar apply kara
+md- mhanje jevdhe medium aahet aani tyachya varche saglyanvar apply kara
+same for lg,xl,2xl
+
+pn ithe aahe md mhanun sm peksha motha kelyavr md vala hoil samja aapan md nasta dila tr md lapn sm wala lagla
+asta karan sm aani sm che varche sagle
+
+##imp when we use mx-w-sm then it fix the widht then inner div image shrink width only if height is more it doesnot shrink
+if height is less it totally fit in the image
+
+
+
+
+##imp-
+div class="h-auto w-full flex flex-wrap items-center text-center p-10">
+        <div class="bg-white shadow-md rounded-lg m-4 p-4">
+            <img src="https://via.placeholder.com/150" alt="Image 1" class="w-32 h-32 mb-4">
+            <p class="text-lg">This is the first item.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg m-4 p-4">
+            <img src="https://via.placeholder.com/150" alt="Image 2" class="w-32 h-32 mb-4">
+            <p class="text-lg">This is the second item.</p>
+        </div>
+    </div> so here only two div come in the row but child of the both div means img and p comes in inline like block because they are not flex am i correct?
+
+So, in summary, the child divs will be arranged in a row within the parent div, but the contents of each child div (the image and the paragraph) will be stacked vertically inside their respective child divs. 
+This results in two divs side by side, each containing an image above a paragraph
+
+
+###imp-
+<div class="w-1 flex flex-col items-center mb-12">
+                  <img class="h-44 w-44 mb-3" src="data:image/png" alt="">
+                  <p class="text-3xl font-bold text-white">600+</p>
+                  <p class="text-3xl font-bold text-gray-500">Different Courses</p>
+                </div>   
+if i give outer div width 1 then image should be compress then same apply for both paragraph tag the because of 1 width why they not compress?
+
+
+##imp- flex should use
+Use justify-center: When you want to center all items as a group with no space between them.
+justify-around: The outer spaces (before the first item and after the last item) are half the size of the spaces between items.
+justify-evenly: All spaces, including the outer spaces and the spaces between items, are exactly the same.
+justify-between:The space between each item is equal.There is no space before the first item or after the last item.
+
+#imp flex should use
+flex-row
+justify-center- horizontal center
+item-center- vertical center
+
+flex-column
+justify-center- vertical center
+item-center-  horizontal center
+
+
+
+
+
+
+Flexbox and flex-shrink Behavior:
+Images and Flex Items:
+
+By default, flex items (such as the image) have flex-shrink: 1, meaning they are allowed to shrink in response to the container's constraints. This is why the image shrinks to fit the narrow div width, even though its original dimensions are much larger.
+The image's natural flexibility in terms of size, coupled with flex-shrink: 1, makes it adapt to the container's width.
+Text in Flex Items:
+
+Text within a flex item (such as the paragraph) does not behave the same way as images because text size is determined by its font size, which does not change automatically to fit the container.
+The text does not shrink in the same way because flex-shrink does not alter the font size; it only affects the container's ability to reduce its size. The text's natural behavior is to either wrap, overflow, 
+or be clipped, depending on the container's properties (e.g., overflow: hidden).
+
+
+#imp- difference between %,rem,vw
+$percentage- If you set an element's width to 20%, it will occupy 20% of the width of its parent element.
+$rem- Definition: rem stands for "root em" and is a unit that is relative to the root element’s font size (usually the <html> element).
+Calculation: If the root font size is 16px, then 20rem equals 20 * 16px = 320px.
+$vw- Definition: vw is a unit of measurement that stands for "viewport width." One vw unit is equal to 1% of the width of the viewport (the visible area of the web page).
+Calculation: If you set an element's width to 20vw, it will occupy 20% of the viewport width, regardless of the parent element's dimensions.
